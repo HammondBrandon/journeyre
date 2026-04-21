@@ -11,7 +11,7 @@ const footerLinks = {
   selling: [
     { label: "Selling Resources", href: "/selling" },
     { label: "Request a CMA", href: "/selling#cma" },
-    { label: "Home Valuation", href: "/selling#cma" },
+    { label: "Home Valuation", href: "/selling#home-valuation" },
   ],
   company: [
     { label: "About Us", href: "/about" },

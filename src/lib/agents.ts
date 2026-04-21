@@ -1,3 +1,10 @@
+import type { StaticImageData } from "next/image";
+import ethan from "../../public/images/agents/ethan-zell-journey-realty-group.jpg";
+import brantley from "../../public/images/agents/brantley-ivey-journey-realty-group.jpg";
+import christy from "../../public/images/agents/christy-kilgore-journey-realty-group.jpg";
+import heather from "../../public/images/agents/heather-kirk-journey-realty-group.jpg";
+import renae from "../../public/images/agents/renae-bell-journey-realty-group.jpg";
+
 export interface Agent {
   id: string;
   slug: string;
@@ -7,7 +14,7 @@ export interface Agent {
   email: string;
   bio: string;
   shortBio: string;
-  photo: string | null;
+  photo: StaticImageData | null;
   specialties: string[];
   licenseNumber?: string;
   designations?: string[];
@@ -38,7 +45,7 @@ export const agents: Agent[] = [
     shortBio:
       "Dedicated real estate professional serving the West Georgia area with integrity and expertise.",
     bio: "Placeholder bio — update with agent's full biography. This agent is a dedicated real estate professional serving the West Georgia area with a commitment to integrity, local expertise, and exceptional client service. With years of experience guiding buyers and sellers through every step of the real estate journey, they bring both market knowledge and genuine care to every transaction.",
-    photo: null,
+    photo: renae,
     specialties: ["Residential Sales", "First-Time Buyers", "Relocation"],
     serviceAreas: ["Tallapoosa", "Bremen", "Cedartown", "Carrollton"],
     designations: ["REALTOR®"],
@@ -55,7 +62,7 @@ export const agents: Agent[] = [
     shortBio:
       "Passionate about connecting clients with their perfect home in West Georgia.",
     bio: "Placeholder bio — update with agent's full biography. This agent brings passion and dedication to every client interaction, helping buyers and sellers navigate the real estate market with confidence. Their deep knowledge of the local area and commitment to client satisfaction makes them a trusted partner in any real estate transaction.",
-    photo: null,
+    photo: christy,
     specialties: ["Buyer Representation", "Seller Representation", "Land"],
     serviceAreas: ["Tallapoosa", "Haralson County", "Polk County"],
     designations: ["REALTOR®"],
@@ -71,7 +78,7 @@ export const agents: Agent[] = [
     shortBio:
       "Committed to making the home buying and selling process smooth and stress-free.",
     bio: "Placeholder bio — update with agent's full biography. With a focus on clear communication and personalized service, this agent ensures every client feels informed and supported throughout their real estate journey. Their attention to detail and market insight consistently deliver outstanding results.",
-    photo: null,
+    photo: ethan,
     specialties: ["Residential", "Investment Properties", "Condos & Townhomes"],
     serviceAreas: ["Tallapoosa", "Dallas", "Villa Rica"],
     designations: ["REALTOR®"],
@@ -87,7 +94,7 @@ export const agents: Agent[] = [
     shortBio:
       "Helping families find their place in the community with dedication and local knowledge.",
     bio: "Placeholder bio — update with agent's full biography. This agent is deeply rooted in the community and leverages that connection to help clients find not just a home, but the right neighborhood and lifestyle fit. Their warm, client-first approach and tireless work ethic make every transaction a positive experience.",
-    photo: null,
+    photo: heather,
     specialties: ["Family Homes", "New Construction", "Relocation"],
     serviceAreas: ["Tallapoosa", "Buchanan", "Bowdon"],
     designations: ["REALTOR®"],
@@ -104,7 +111,7 @@ export const agents: Agent[] = [
     shortBio:
       "Your trusted guide through every step of the real estate process in West Georgia.",
     bio: "Placeholder bio — update with agent's full biography. This agent combines professional expertise with a personalized touch to deliver an exceptional experience for every client. Whether you are buying your first home, upgrading, or selling, they provide the guidance and support needed to achieve your goals with confidence.",
-    photo: null,
+    photo: brantley,
     specialties: ["Residential Sales", "Commercial", "Property Management"],
     serviceAreas: ["Tallapoosa", "Carrollton", "Anniston", "Cleburne County"],
     designations: ["REALTOR®"],

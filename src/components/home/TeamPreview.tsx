@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { agents } from "@/lib/agents";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
@@ -50,10 +51,11 @@ export default function TeamPreview() {
               <Link href={`/team/${agent.slug}`} aria-label={`View ${agent.name}'s profile`}>
                 <div className="w-40 h-40 mx-auto mb-5 overflow-hidden rounded-full border-4 border-border-light group-hover:border-primary/40 transition-colors">
                   {agent.photo ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={agent.photo}
                       alt={agent.name}
+                      width={160}
+                      height={160}
                       className="w-full h-full object-cover"
                     />
                   ) : (

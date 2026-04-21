@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { agents } from "@/lib/agents";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -59,14 +60,18 @@ export default function TeamPage() {
                 className="group border border-border-light hover:border-primary/30 hover:shadow-[var(--shadow-card-hover)] transition-all duration-200"
               >
                 {/* Photo */}
-                <Link href={`/team/${agent.slug}`} aria-label={`View ${agent.name}'s profile`}>
-                  <div className="aspect-[4/3] overflow-hidden">
+                <Link
+                  href={`/team/${agent.slug}`}
+                  aria-label={`View ${agent.name}'s profile`}
+                >
+                  <div className="relative aspect-4/3 overflow-hidden">
                     {agent.photo ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         src={agent.photo}
                         alt={agent.name}
-                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                        fill
+                        className="object-cover object-[0%_20%] group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
                       />
                     ) : (
                       <AgentAvatar name={agent.name} />
@@ -93,7 +98,11 @@ export default function TeamPage() {
 
                   {agent.serviceAreas.length > 0 && (
                     <p className="flex items-start gap-1.5 font-lora text-xs text-ink-muted mb-4">
-                      <MapPin size={12} className="text-primary mt-0.5 shrink-0" aria-hidden="true" />
+                      <MapPin
+                        size={12}
+                        className="text-primary mt-0.5 shrink-0"
+                        aria-hidden="true"
+                      />
                       {agent.serviceAreas.slice(0, 3).join(", ")}
                     </p>
                   )}

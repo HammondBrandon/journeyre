@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import CTASection from "@/components/home/CTASection";
 import ListingCard from "@/components/properties/ListingCard";
 import PaginationBar from "@/components/properties/PaginationBar";
+import Image from "next/image";
 import { Phone, Mail, MapPin, Award, ChevronLeft } from "lucide-react";
 import { searchListings, getBatchCoverPhotos } from "@/lib/rets-client";
 import type { Listing } from "@/lib/rets-types";
@@ -238,13 +239,14 @@ export default async function AgentProfilePage({ params, searchParams }: AgentPa
             {/* Sidebar */}
             <div className="lg:col-span-1">
               {/* Photo */}
-              <div className="aspect-[3/4] overflow-hidden mb-6 border border-border-light">
+              <div className="relative aspect-3/4 overflow-hidden mb-6 border border-border-light">
                 {agent.photo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={agent.photo}
                     alt={agent.name}
-                    className="w-full h-full object-cover object-top"
+                    fill
+                    className="object-cover object-top"
+                    priority
                   />
                 ) : (
                   <AgentAvatar name={agent.name} />
@@ -399,10 +401,9 @@ export default async function AgentProfilePage({ params, searchParams }: AgentPa
                   href={`/team/${a.slug}`}
                   className="group text-center"
                 >
-                  <div className="w-20 h-20 mx-auto mb-3 overflow-hidden rounded-full border-2 border-border-light group-hover:border-primary/40 transition-colors">
+                  <div className="relative w-20 h-20 mx-auto mb-3 overflow-hidden rounded-full border-2 border-border-light group-hover:border-primary/40 transition-colors">
                     {a.photo ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={a.photo} alt={a.name} className="w-full h-full object-cover" />
+                      <Image src={a.photo} alt={a.name} fill className="object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-primary-light">
                         <span className="font-raleway font-bold text-lg text-primary/60">
