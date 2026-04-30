@@ -23,14 +23,15 @@ export default function HeroSection() {
       aria-label="Hero"
     >
       {/* Video background */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
+      <div className="absolute inset-0 w-full h-full overflow-hidden aspect-video pointer-events-none">
         <iframe
-          src="https://www.youtube.com/embed/VfROvUPseOE?si=c1X2WX6tmaXTU9x7&autoplay=1&mute=1&loop=1&controls=0&playsinline=1&playlist=VfROvUPseOE&modestbranding=1&rel=0"
+          src="https://www.youtube.com/embed/VfROvUPseOE?si=c1X2WX6tmaXTU9x7&autoplay=1&mute=1&loop=1&controls=0&playsinline=1&playlist=VfROvUPseOE&modestbranding=1&rel=0&enablejsapi=1&fs=0"
           title="Hero background video"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           referrerPolicy="strict-origin-when-cross-origin"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full pointer-events-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full"
         />
+        <div className="absolute inset-0" />
       </div>
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/50" />

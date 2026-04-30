@@ -50,7 +50,11 @@ export default function ContactPage() {
                 </h2>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <MapPin size={16} className="text-primary mt-0.5 shrink-0" aria-hidden="true" />
+                    <MapPin
+                      size={16}
+                      className="text-primary mt-0.5 shrink-0"
+                      aria-hidden="true"
+                    />
                     <div>
                       <p className="font-lora text-sm text-ink-secondary">
                         102 Head Ave.
@@ -64,21 +68,22 @@ export default function ContactPage() {
                     href="tel:7708557995"
                     className="flex items-center gap-3 font-lora text-sm text-ink-secondary hover:text-primary transition-colors"
                   >
-                    <Phone size={16} className="text-primary shrink-0" aria-hidden="true" />
+                    <Phone
+                      size={16}
+                      className="text-primary shrink-0"
+                      aria-hidden="true"
+                    />
                     (770) 855-7995
-                  </a>
-                  <a
-                    href="tel:7708553622"
-                    className="flex items-center gap-3 font-lora text-sm text-ink-secondary hover:text-primary transition-colors"
-                  >
-                    <Phone size={16} className="text-primary shrink-0" aria-hidden="true" />
-                    (770) 855-3622
                   </a>
                   <a
                     href="mailto:info@journeyrealtygroup.net"
                     className="flex items-center gap-3 font-lora text-sm text-ink-secondary hover:text-primary transition-colors"
                   >
-                    <Mail size={16} className="text-primary shrink-0" aria-hidden="true" />
+                    <Mail
+                      size={16}
+                      className="text-primary shrink-0"
+                      aria-hidden="true"
+                    />
                     info@journeyrealtygroup.net
                   </a>
                 </div>
@@ -87,7 +92,11 @@ export default function ContactPage() {
               {/* Hours */}
               <div className="border-t border-border-light pt-6">
                 <div className="flex items-center gap-2 mb-4">
-                  <Clock size={15} className="text-primary" aria-hidden="true" />
+                  <Clock
+                    size={15}
+                    className="text-primary"
+                    aria-hidden="true"
+                  />
                   <h2 className="font-raleway font-bold text-base text-ink">
                     Office Hours
                   </h2>
@@ -98,7 +107,10 @@ export default function ContactPage() {
                     { day: "Saturday", hours: "By Appointment" },
                     { day: "Sunday", hours: "By Appointment" },
                   ].map(({ day, hours }) => (
-                    <div key={day} className="flex justify-between font-lora text-sm">
+                    <div
+                      key={day}
+                      className="flex justify-between font-lora text-sm"
+                    >
                       <span className="text-ink-secondary">{day}</span>
                       <span className="text-ink-muted">{hours}</span>
                     </div>
@@ -126,7 +138,11 @@ export default function ContactPage() {
                           {agent.title}
                         </p>
                       </div>
-                      <Phone size={13} className="text-ink-muted group-hover:text-primary transition-colors" aria-hidden="true" />
+                      <Phone
+                        size={13}
+                        className="text-ink-muted group-hover:text-primary transition-colors"
+                        aria-hidden="true"
+                      />
                     </Link>
                   ))}
                 </div>

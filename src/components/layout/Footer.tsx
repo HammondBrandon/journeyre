@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 const footerLinks = {
@@ -32,14 +33,15 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-1">
             <div className="mb-5">
-              <div className="flex flex-col leading-none">
-                <span className="font-raleway font-bold text-xl tracking-tight text-white">
-                  Journey
-                </span>
-                <span className="font-raleway font-light text-sm tracking-[0.25em] text-primary uppercase">
-                  Realty Group
-                </span>
-              </div>
+              <Link href="/" aria-label="Journey Realty Group — Home">
+                <Image
+                  src="/journey-realty-group-logo-white-transparent.webp"
+                  alt="Journey Realty Group"
+                  width={180}
+                  height={56}
+                  className="h-14 w-auto"
+                />
+              </Link>
             </div>
             <p className="font-lora text-sm text-white/70 leading-relaxed mb-6">
               Whether you are buying or selling, we are with you every step of

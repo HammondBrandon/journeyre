@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
 import { cn } from "@/lib/cn";
 
@@ -83,9 +84,7 @@ export default function Header() {
       {/* Top bar */}
       <div className="hidden md:block bg-ink text-white text-xs py-2">
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between font-raleway">
-          <p className="text-white/70">
-            102 Head Ave., Tallapoosa, GA 30176
-          </p>
+          <p className="text-white/70">102 Head Ave., Tallapoosa, GA 30176</p>
           <a
             href="tel:7708557995"
             className="flex items-center gap-1.5 text-white/90 hover:text-primary transition-colors"
@@ -100,39 +99,51 @@ export default function Header() {
       <header
         className={cn(
           "sticky top-0 z-50 bg-white transition-shadow duration-200",
-          isScrolled ? "shadow-[var(--shadow-nav)]" : "border-b border-border-light"
+          isScrolled
+            ? "shadow-[var(--shadow-nav)]"
+            : "border-b border-border-light",
         )}
       >
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between h-16 md:h-20" ref={dropdownRef}>
+          <div
+            className="flex items-center justify-between h-16 md:h-20"
+            ref={dropdownRef}
+          >
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Journey Realty Group — Home">
-              <div className="flex flex-col leading-none">
-                <span className="font-raleway font-bold text-xl md:text-2xl tracking-tight text-ink">
-                  Journey
-                </span>
-                <span className="font-raleway font-light text-sm md:text-base tracking-[0.25em] text-primary uppercase">
-                  Realty Group
-                </span>
-              </div>
+            <Link
+              href="/"
+              className="flex items-center gap-3 shrink-0"
+              aria-label="Journey Realty Group — Home"
+            >
+              <Image
+                src="/journey-realty-group-logo-transparent.webp"
+                alt="Journey Realty Group"
+                width={180}
+                height={56}
+                className="h-10 md:h-14 w-auto"
+                priority
+              />
             </Link>
 
             {/* Desktop nav */}
-            <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-0">
+            <nav
+              aria-label="Main navigation"
+              className="hidden lg:flex items-center gap-0"
+            >
               {navItems.map((item) =>
                 item.children ? (
                   <div key={item.label} className="relative">
                     <button
                       onClick={() =>
                         setOpenDropdown(
-                          openDropdown === item.label ? null : item.label
+                          openDropdown === item.label ? null : item.label,
                         )
                       }
                       className={cn(
                         "flex items-center gap-1 px-4 py-2 font-raleway text-xs font-semibold uppercase tracking-[0.12em] transition-colors cursor-pointer",
                         openDropdown === item.label
                           ? "text-primary"
-                          : "text-ink-secondary hover:text-primary"
+                          : "text-ink-secondary hover:text-primary",
                       )}
                       aria-expanded={openDropdown === item.label}
                       aria-haspopup="true"
@@ -142,7 +153,7 @@ export default function Header() {
                         size={12}
                         className={cn(
                           "transition-transform duration-150",
-                          openDropdown === item.label && "rotate-180"
+                          openDropdown === item.label && "rotate-180",
                         )}
                       />
                     </button>
@@ -170,7 +181,7 @@ export default function Header() {
                   >
                     {item.label}
                   </Link>
-                )
+                ),
               )}
             </nav>
 
@@ -199,7 +210,9 @@ export default function Header() {
       <div
         className={cn(
           "fixed inset-0 z-40 lg:hidden transition-opacity duration-200",
-          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          mobileOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none",
         )}
       >
         {/* Backdrop */}
@@ -213,11 +226,13 @@ export default function Header() {
         <div
           className={cn(
             "absolute top-0 right-0 h-full w-80 max-w-full bg-white shadow-2xl flex flex-col transition-transform duration-300",
-            mobileOpen ? "translate-x-0" : "translate-x-full"
+            mobileOpen ? "translate-x-0" : "translate-x-full",
           )}
         >
           <div className="flex items-center justify-between px-6 h-16 border-b border-border-light">
-            <span className="font-raleway font-bold text-lg text-ink">Menu</span>
+            <span className="font-raleway font-bold text-lg text-ink">
+              Menu
+            </span>
             <button
               onClick={() => setMobileOpen(false)}
               className="p-2 text-ink-secondary hover:text-primary"
@@ -244,7 +259,7 @@ export default function Header() {
                 >
                   {item.label}
                 </Link>
-              )
+              ),
             )}
           </nav>
 
@@ -289,7 +304,10 @@ function MobileDropdown({
         {item.label}
         <ChevronDown
           size={14}
-          className={cn("transition-transform duration-150", open && "rotate-180")}
+          className={cn(
+            "transition-transform duration-150",
+            open && "rotate-180",
+          )}
         />
       </button>
       {open && (

@@ -26,14 +26,17 @@ export async function POST(request: NextRequest) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid request body" },
+      { status: 400 },
+    );
   }
 
   const parsed = contactSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
       { error: "Validation failed", details: parsed.error.flatten() },
-      { status: 422 }
+      { status: 422 },
     );
   }
 
@@ -127,7 +130,7 @@ Submitted via journeyrealtygroup.net contact form.
         from: "Journey Realty Group <no-reply@journeyrealtygroup.net>",
         to: [toEmail],
         reply_to: email,
-        subject: `New Contact: ${subjectLabels[subject]} — ${name}`,
+        subject: `New Contact Submission: ${subjectLabels[subject]} — ${name}`,
         text: emailBody,
         html: emailHtml,
       }),
@@ -136,12 +139,18 @@ Submitted via journeyrealtygroup.net contact form.
     if (!resendResponse.ok) {
       const errorData = await resendResponse.text();
       console.error("[Resend Error]", errorData);
-      return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
+      return NextResponse.json(
+        { error: "Failed to send email" },
+        { status: 500 },
+      );
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("[Contact API Error]", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 }
