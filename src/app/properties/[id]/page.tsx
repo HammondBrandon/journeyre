@@ -10,6 +10,7 @@ import {
 import type { Listing } from "@/lib/rets-types";
 import Button from "@/components/ui/Button";
 import PhotoGallery from "@/components/properties/PhotoGallery";
+import GAMLSDisclaimer from "@/components/properties/GAMLSDisclaimer";
 import {
   Bed,
   Bath,
@@ -594,6 +595,8 @@ export default async function ListingDetailPage({ params }: PageProps) {
           </div>
         </div>
       </div>
+
+      <GAMLSDisclaimer />
     </>
   );
 }

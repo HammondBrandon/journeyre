@@ -4,6 +4,7 @@ import { searchListings, getBatchCoverPhotos } from "@/lib/rets-client";
 import type { Listing } from "@/lib/rets-types";
 import ListingCard from "@/components/properties/ListingCard";
 import PaginationBar from "@/components/properties/PaginationBar";
+import GAMLSDisclaimer from "@/components/properties/GAMLSDisclaimer";
 import PageHeader from "@/components/ui/PageHeader";
 import Button from "@/components/ui/Button";
 import { AlertCircle } from "lucide-react";
@@ -198,6 +199,8 @@ export default async function OfficeListingsPage({ searchParams }: PageProps) {
           </div>
         </div>
       </section>
+
+      <GAMLSDisclaimer />
     </>
   );
 }

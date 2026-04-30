@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Bed, Bath, Square, MapPin } from "lucide-react";
 import type { Listing } from "@/lib/rets-types";
 
@@ -38,6 +39,7 @@ export default function ListingCard({ listing, priority, coverPhotoUrl }: Listin
     sqft,
     propertySubType,
     photoCount,
+    officeName,
   } = listing;
 
   // Prefer the server-fetched CDN URL; fall back to the proxy route
@@ -140,6 +142,21 @@ export default function ListingCard({ listing, priority, coverPhotoUrl }: Listin
           <span className="ml-auto font-raleway text-[10px] text-ink-muted uppercase tracking-wide">
             MLS# {listingId}
           </span>
+        </div>
+
+        {/* GAMLS attribution — required per GAMLS IDX license */}
+        <div className="flex items-center justify-between gap-2 mt-3 pt-3 border-t border-border-light">
+          <p className="font-lora text-[10px] text-ink-muted leading-tight">
+            Listing Courtesy of:{" "}
+            <span className="font-semibold">{officeName ?? "GAMLS Member"}</span>
+          </p>
+          <Image
+            src="/images/gamls-logos/gamls_idx_81x32.png"
+            alt="Georgia MLS"
+            width={81}
+            height={32}
+            className="shrink-0"
+          />
         </div>
       </div>
     </article>

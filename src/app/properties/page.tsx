@@ -5,6 +5,7 @@ import type { PropertyClass } from "@/lib/rets-types";
 import SearchFilters, { ActiveFilters } from "@/components/properties/SearchFilters";
 import ListingCard from "@/components/properties/ListingCard";
 import PaginationBar from "@/components/properties/PaginationBar";
+import GAMLSDisclaimer from "@/components/properties/GAMLSDisclaimer";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
 import { AlertCircle } from "lucide-react";
@@ -225,6 +226,8 @@ export default async function PropertiesPage({ searchParams }: PageProps) {
           </div>
         </div>
       </section>
+
+      <GAMLSDisclaimer />
     </>
   );
 }
