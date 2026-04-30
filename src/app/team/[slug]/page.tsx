@@ -6,6 +6,7 @@ import { agents, getAgentBySlug } from "@/lib/agents";
 import type { Agent } from "@/lib/agents";
 import Button from "@/components/ui/Button";
 import CTASection from "@/components/home/CTASection";
+import GAMLSDisclaimer from "@/components/properties/GAMLSDisclaimer";
 import ListingCard from "@/components/properties/ListingCard";
 import PaginationBar from "@/components/properties/PaginationBar";
 import Image from "next/image";
@@ -142,6 +143,7 @@ async function AgentListings({ agent, page }: { agent: Agent; page: number }) {
           </div>
         )}
       </div>
+      <GAMLSDisclaimer />
     </section>
   );
 }

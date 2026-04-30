@@ -304,7 +304,7 @@ export function recordToListing(r: Record<string, string>): Listing {
     agentName:     pick(r, "ShowingContactName"),
     agentPhone:    pick(r, "AttributionContact", "ShowingContactPhone"),
     agentEmail:    undefined,
-    officeName:    undefined,
+    officeName:    pick(r, "ListOfficeName"),
     listAgentCode: pick(r, "ListAgent"),
 
     lat: num(pick(r, "Latitude")),
