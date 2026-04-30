@@ -105,7 +105,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2.5">
               {footerLinks.buying.map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="font-lora text-sm text-white/70 hover:text-white transition-colors"
@@ -124,7 +124,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2.5">
               {footerLinks.selling.map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="font-lora text-sm text-white/70 hover:text-white transition-colors"
@@ -143,7 +143,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2.5">
               {footerLinks.company.map((link) => (
-                <li key={link.href}>
+                <li key={link.label}>
                   <Link
                     href={link.href}
                     className="font-lora text-sm text-white/70 hover:text-white transition-colors"
