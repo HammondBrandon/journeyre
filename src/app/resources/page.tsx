@@ -1,7 +1,16 @@
 import type { Metadata } from "next";
 import SectionHeader from "@/components/ui/SectionHeader";
+import PageHeader from "@/components/ui/PageHeader";
 import CTASection from "@/components/home/CTASection";
-import { ExternalLink, BookOpen, Calculator, FileText, Scale, Home, DollarSign } from "lucide-react";
+import {
+  ExternalLink,
+  BookOpen,
+  Calculator,
+  FileText,
+  Scale,
+  Home,
+  DollarSign,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Resources",
@@ -123,7 +132,13 @@ interface ResourceCardProps {
   internal?: boolean;
 }
 
-function ResourceCard({ icon: Icon, title, description, href, internal }: ResourceCardProps) {
+function ResourceCard({
+  icon: Icon,
+  title,
+  description,
+  href,
+  internal,
+}: ResourceCardProps) {
   const content = (
     <>
       <div className="flex items-start gap-4 mb-4">
@@ -134,7 +149,11 @@ function ResourceCard({ icon: Icon, title, description, href, internal }: Resour
           <h3 className="font-raleway font-bold text-base text-ink mb-2">
             {title}
             {href && !internal && (
-              <ExternalLink size={12} className="inline ml-1.5 text-ink-muted" aria-label="External link" />
+              <ExternalLink
+                size={12}
+                className="inline ml-1.5 text-ink-muted"
+                aria-label="External link"
+              />
             )}
           </h3>
           <p className="font-lora text-sm text-ink-secondary leading-relaxed">
@@ -175,32 +194,20 @@ function ResourceCard({ icon: Icon, title, description, href, internal }: Resour
   }
 
   return (
-    <div className="p-6 border border-border-light bg-white">
-      {content}
-    </div>
+    <div className="p-6 border border-border-light bg-white">{content}</div>
   );
 }
 
 export default function ResourcesPage() {
   return (
     <>
-      {/* Page header */}
-      <section className="bg-surface border-b border-border-light py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl">
-            <p className="font-raleway text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-              Education & Tools
-            </p>
-            <h1 className="font-raleway font-bold text-4xl md:text-5xl text-ink leading-tight mb-5">
-              Real Estate Resources
-            </h1>
-            <p className="font-lora text-lg text-ink-secondary leading-relaxed">
-              Helpful guides, tools, and links for buyers, sellers, and anyone
-              navigating the real estate process in West Georgia.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Education & Tools"
+        title="Real Estate Resources"
+        subtitle="Helpful guides, tools, and links for buyers, sellers, and anyone navigating the real estate process in West Georgia."
+        image="/images/accessory/wide-office-journey-realty-group.jpg"
+        imageAlt="Journey Realty Group office"
+      />
 
       {/* Buyer resources */}
       <section className="py-20 md:py-24 bg-white">

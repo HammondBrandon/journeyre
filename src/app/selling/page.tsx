@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import SectionHeader from "@/components/ui/SectionHeader";
+import PageHeader from "@/components/ui/PageHeader";
 import Button from "@/components/ui/Button";
 import CTASection from "@/components/home/CTASection";
 import CMAForm from "@/components/forms/CMAForm";
-import { CheckCircle2, TrendingUp, Eye, FileText, DollarSign, Key } from "lucide-react";
+import {
+  CheckCircle2,
+  TrendingUp,
+  Eye,
+  FileText,
+  DollarSign,
+  Key,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Selling Your Home",
@@ -58,23 +67,13 @@ const sellingSteps = [
 export default function SellingPage() {
   return (
     <>
-      {/* Page header */}
-      <section className="bg-surface border-b border-border-light py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl">
-            <p className="font-raleway text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-              For Sellers
-            </p>
-            <h1 className="font-raleway font-bold text-4xl md:text-5xl text-ink leading-tight mb-5">
-              Selling Your Home in West Georgia
-            </h1>
-            <p className="font-lora text-lg text-ink-secondary leading-relaxed">
-              Getting the best price for your home takes expertise, strategy, and
-              local market knowledge. Our team delivers all three.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="For Sellers"
+        title="Selling Your Home in West Georgia"
+        subtitle="Getting the best price for your home takes expertise, strategy, and local market knowledge. Our team delivers all three."
+        image="/images/accessory/journey-realty-group-interior-entry.jpg"
+        imageAlt="Journey Realty Group office entry area"
+      />
 
       {/* Why sell with us */}
       <section className="py-20 md:py-28 bg-white">
@@ -112,8 +111,14 @@ export default function SellingPage() {
                   "Full-service support through every step",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-primary mt-0.5 shrink-0" aria-hidden="true" />
-                    <span className="font-lora text-sm text-ink-secondary">{item}</span>
+                    <CheckCircle2
+                      size={16}
+                      className="text-primary mt-0.5 shrink-0"
+                      aria-hidden="true"
+                    />
+                    <span className="font-lora text-sm text-ink-secondary">
+                      {item}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -126,16 +131,13 @@ export default function SellingPage() {
 
             {/* Visual placeholder */}
             <div className="aspect-[4/3] bg-surface-alt overflow-hidden">
-              <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-primary-light to-primary/10">
-                <div className="text-center p-8">
-                  <div className="w-16 h-16 bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <TrendingUp size={28} className="text-primary" aria-hidden="true" />
-                  </div>
-                  <p className="font-raleway text-xs uppercase tracking-widest text-primary/70">
-                    Photo coming soon
-                  </p>
-                </div>
-              </div>
+              <Image
+                src="/images/accessory/journey-realty-group-interior-office-space.jpg"
+                alt="Journey Realty Group office view from one end"
+                className="w-full h-full object-cover"
+                width={800}
+                height={600}
+              />
             </div>
           </div>
         </div>
@@ -158,7 +160,11 @@ export default function SellingPage() {
               >
                 <div className="flex items-center gap-4 mb-4">
                   <div className="w-10 h-10 bg-primary-light flex items-center justify-center shrink-0">
-                    <step.icon size={18} className="text-primary" aria-hidden="true" />
+                    <step.icon
+                      size={18}
+                      className="text-primary"
+                      aria-hidden="true"
+                    />
                   </div>
                   <span className="font-raleway font-bold text-xs uppercase tracking-widest text-ink-muted">
                     Step {String(i + 1).padStart(2, "0")}

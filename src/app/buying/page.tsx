@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import SectionHeader from "@/components/ui/SectionHeader";
+import PageHeader from "@/components/ui/PageHeader";
 import Button from "@/components/ui/Button";
 import CTASection from "@/components/home/CTASection";
-import { CheckCircle2, ArrowRight } from "lucide-react";
+import MortgageCalculator from "@/components/ui/MortgageCalculator";
+import { CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Buying a Home",
@@ -80,24 +82,13 @@ const buyerFAQs = [
 export default function BuyingPage() {
   return (
     <>
-      {/* Page header */}
-      <section className="bg-surface border-b border-border-light py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl">
-            <p className="font-raleway text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-              For Buyers
-            </p>
-            <h1 className="font-raleway font-bold text-4xl md:text-5xl text-ink leading-tight mb-5">
-              Buying a Home in West Georgia
-            </h1>
-            <p className="font-lora text-lg text-ink-secondary leading-relaxed">
-              We make the home buying process clear, manageable, and even
-              enjoyable. Here is everything you need to know — and our team is
-              here every step of the way.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="For Buyers"
+        title="Buying a Home in West Georgia"
+        subtitle="We make the home buying process clear, manageable, and even enjoyable. Here is everything you need to know — and our team is here every step of the way."
+        image="/images/accessory/journey-realty-group-interior-side-door.jpg"
+        imageAlt="Journey Realty Group office side door"
+      />
 
       {/* Steps */}
       <section className="py-20 md:py-28 bg-white">
@@ -128,9 +119,7 @@ export default function BuyingPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <Button href="/contact">
-              Start Your Home Search
-            </Button>
+            <Button href="/contact">Start Your Home Search</Button>
           </div>
         </div>
       </section>
@@ -196,33 +185,16 @@ export default function BuyingPage() {
         </div>
       </section>
 
-      {/* Mortgage calculator placeholder */}
+      {/* Mortgage calculator */}
       <section className="py-20 md:py-24 bg-white" id="mortgage-calculator">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl mx-auto text-center">
-            <SectionHeader
-              eyebrow="Tools"
-              title="Mortgage Calculator"
-              subtitle="Get a quick estimate of your monthly payment based on home price, down payment, and loan terms."
-              className="mb-10"
-            />
-            <div className="p-10 border-2 border-dashed border-border text-center bg-surface">
-              <p className="font-raleway text-sm font-semibold text-ink-muted mb-2">
-                Mortgage Calculator Coming Soon
-              </p>
-              <p className="font-lora text-sm text-ink-muted">
-                In the meantime, speak with one of our agents and we can
-                connect you with a trusted local lender for personalized
-                payment estimates.
-              </p>
-              <div className="mt-6">
-                <Button href="/contact" variant="outline">
-                  <ArrowRight size={14} />
-                  Contact an Agent
-                </Button>
-              </div>
-            </div>
-          </div>
+          <SectionHeader
+            eyebrow="Tools"
+            title="Mortgage Calculator"
+            subtitle="Get a quick estimate of your monthly payment based on home price, down payment, and loan terms."
+            className="mb-10"
+          />
+          <MortgageCalculator />
         </div>
       </section>
 

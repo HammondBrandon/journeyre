@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Button from "@/components/ui/Button";
 import SectionHeader from "@/components/ui/SectionHeader";
+import PageHeader from "@/components/ui/PageHeader";
 import CTASection from "@/components/home/CTASection";
 import { CheckCircle2, MapPin, Phone, Award } from "lucide-react";
 
@@ -45,23 +47,13 @@ const values = [
 export default function AboutPage() {
   return (
     <>
-      {/* Page header */}
-      <section className="bg-surface border-b border-border-light py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl">
-            <p className="font-raleway text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-              Our Story
-            </p>
-            <h1 className="font-raleway font-bold text-4xl md:text-5xl text-ink leading-tight mb-5">
-              About Journey Realty Group
-            </h1>
-            <p className="font-lora text-lg text-ink-secondary leading-relaxed">
-              A community-rooted brokerage dedicated to guiding buyers and
-              sellers through every step of the real estate journey.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Our Story"
+        title="About Journey Realty Group"
+        subtitle="A community-rooted brokerage dedicated to guiding buyers and sellers through every step of the real estate journey."
+        image="/images/accessory/conference-table-journey-realty-group.jpg"
+        imageAlt="Journey Realty Group conference table"
+      />
 
       {/* Mission */}
       <section className="py-20 md:py-28 bg-white">
@@ -70,27 +62,18 @@ export default function AboutPage() {
             {/* Visual */}
             <div className="relative">
               <div className="aspect-[4/3] bg-surface-alt overflow-hidden">
-                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-primary-light to-primary/10">
-                  <div className="text-center p-8">
-                    <div className="w-16 h-16 bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        className="w-8 h-8 text-primary"
-                        aria-hidden="true"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                      </svg>
-                    </div>
-                    <p className="font-raleway text-xs uppercase tracking-widest text-primary/70">
-                      Office photo coming soon
-                    </p>
-                  </div>
-                </div>
+                <Image
+                  src="/images/accessory/ethan-renae-journey-realty-group-working.jpg"
+                  alt="Journey Realty Group office"
+                  className="w-full h-full object-cover"
+                  width={800}
+                  height={600}
+                />
               </div>
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/10 -z-10 hidden lg:block" aria-hidden="true" />
+              <div
+                className="absolute -bottom-4 -right-4 w-32 h-32 bg-primary/10 -z-10 hidden lg:block"
+                aria-hidden="true"
+              />
             </div>
 
             {/* Content */}
@@ -141,7 +124,11 @@ export default function AboutPage() {
             {values.map((value) => (
               <div key={value.title} className="text-center">
                 <div className="w-12 h-12 bg-primary-light flex items-center justify-center mx-auto mb-5">
-                  <value.icon size={22} className="text-primary" aria-hidden="true" />
+                  <value.icon
+                    size={22}
+                    className="text-primary"
+                    aria-hidden="true"
+                  />
                 </div>
                 <h3 className="font-raleway font-bold text-base text-ink mb-3">
                   {value.title}
@@ -165,16 +152,30 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-2 font-lora text-ink-secondary">
                 <p className="flex items-center gap-2">
-                  <MapPin size={15} className="text-primary shrink-0" aria-hidden="true" />
+                  <MapPin
+                    size={15}
+                    className="text-primary shrink-0"
+                    aria-hidden="true"
+                  />
                   102 Head Ave., Tallapoosa, GA 30176
                 </p>
                 <p className="flex items-center gap-2">
-                  <Phone size={15} className="text-primary shrink-0" aria-hidden="true" />
-                  <a href="tel:7708557995" className="hover:text-primary transition-colors">
+                  <Phone
+                    size={15}
+                    className="text-primary shrink-0"
+                    aria-hidden="true"
+                  />
+                  <a
+                    href="tel:7708557995"
+                    className="hover:text-primary transition-colors"
+                  >
                     (770) 855-7995
                   </a>
                   &nbsp;/&nbsp;
-                  <a href="tel:7708553622" className="hover:text-primary transition-colors">
+                  <a
+                    href="tel:7708553622"
+                    className="hover:text-primary transition-colors"
+                  >
                     (770) 855-3622
                   </a>
                 </p>

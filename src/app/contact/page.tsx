@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SectionHeader from "@/components/ui/SectionHeader";
+import PageHeader from "@/components/ui/PageHeader";
 import ContactForm from "@/components/forms/ContactForm";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { agents } from "@/lib/agents";
@@ -19,23 +20,13 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      {/* Page header */}
-      <section className="bg-surface border-b border-border-light py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="max-w-2xl">
-            <p className="font-raleway text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-3">
-              Reach Out
-            </p>
-            <h1 className="font-raleway font-bold text-4xl md:text-5xl text-ink leading-tight mb-5">
-              Let&apos;s Talk
-            </h1>
-            <p className="font-lora text-lg text-ink-secondary leading-relaxed">
-              Whether you have a quick question or are ready to start your real
-              estate journey, we are here and happy to help.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Reach Out"
+        title="Let's Talk"
+        subtitle="Whether you have a quick question or are ready to start your real estate journey, we are here and happy to help."
+        image="/images/accessory/brantley-ivey-christy-kilgore-journey-realty-group-working.jpg"
+        imageAlt="Brantley Ivey and Christy Kilgore working at their desks"
+      />
 
       {/* Contact layout */}
       <section className="py-20 md:py-28 bg-white">

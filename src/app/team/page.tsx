@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { agents } from "@/lib/agents";
-import SectionHeader from "@/components/ui/SectionHeader";
+import PageHeader from "@/components/ui/PageHeader";
 import CTASection from "@/components/home/CTASection";
 import { Phone, Mail, MapPin } from "lucide-react";
 
@@ -37,18 +37,13 @@ function AgentAvatar({ name }: { name: string }) {
 export default function TeamPage() {
   return (
     <>
-      {/* Page header */}
-      <section className="bg-surface border-b border-border-light py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader
-            eyebrow="Our People"
-            title="Meet the Team"
-            subtitle="Dedicated REALTORS® with deep roots in the West Georgia community."
-            align="left"
-            className="max-w-xl"
-          />
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Our People"
+        title="Meet the Team"
+        subtitle="Dedicated REALTORS® with deep roots in the West Georgia community."
+        image="/images/accessory/journey-realty-group-interior-doors.jpg"
+        imageAlt="Journey Realty Group doors on wall"
+      />
 
       {/* Agent grid */}
       <section className="py-20 md:py-28 bg-white">

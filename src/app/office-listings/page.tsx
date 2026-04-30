@@ -4,7 +4,7 @@ import { searchListings, getBatchCoverPhotos } from "@/lib/rets-client";
 import type { Listing } from "@/lib/rets-types";
 import ListingCard from "@/components/properties/ListingCard";
 import PaginationBar from "@/components/properties/PaginationBar";
-import SectionHeader from "@/components/ui/SectionHeader";
+import PageHeader from "@/components/ui/PageHeader";
 import Button from "@/components/ui/Button";
 import { AlertCircle } from "lucide-react";
 
@@ -172,19 +172,12 @@ export default async function OfficeListingsPage({ searchParams }: PageProps) {
 
   return (
     <>
-      {/* Page header */}
-      <section className="bg-ink text-white py-14 md:py-18">
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHeader
-            eyebrow="Journey Realty Group"
-            title="Office Listings"
-            subtitle="Properties listed by our agents — active, under contract, and recently sold in West Georgia."
-            light
-            align="left"
-            className="max-w-xl mb-0"
-          />
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Journey Realty Group"
+        title="Office Listings"
+        subtitle="Properties listed by our agents — active, under contract, and recently sold in West Georgia."
+        dark
+      />
 
       {/* Results */}
       <section className="py-10 md:py-14 bg-white">
