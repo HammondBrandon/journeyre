@@ -12,7 +12,7 @@ const footerLinks = {
   selling: [
     { label: "Selling Resources", href: "/selling" },
     { label: "Request a CMA", href: "/selling#cma" },
-    { label: "Home Valuation", href: "/selling#home-valuation" },
+    { label: "Home Valuation", href: "/selling#cma" },
   ],
   company: [
     { label: "About Us", href: "/about" },
@@ -71,6 +71,29 @@ export default function Footer() {
               >
                 <Mail size={14} className="text-primary shrink-0" />
                 info@journeyrealtygroup.net
+              </a>
+            </div>
+
+            {/* Social links */}
+            <div className="flex items-center gap-4 mt-5 pt-5 border-t border-white/10">
+              <a
+                href="https://www.facebook.com/journeyrealtygroup/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-raleway text-xs font-semibold uppercase tracking-wide text-white/60 hover:text-primary transition-colors"
+                aria-label="Journey Realty Group on Facebook"
+              >
+                Facebook
+              </a>
+              <span className="text-white/20" aria-hidden="true">·</span>
+              <a
+                href="https://share.google/d0LYy3VbAlwnhegQb"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-raleway text-xs font-semibold uppercase tracking-wide text-white/60 hover:text-primary transition-colors"
+                aria-label="Journey Realty Group on Google Business"
+              >
+                Google Business
               </a>
             </div>
           </div>

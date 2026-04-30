@@ -7,7 +7,7 @@ import TestimonialsSection from "@/components/home/TestimonialsSection";
 import CTASection from "@/components/home/CTASection";
 
 export const metadata: Metadata = {
-  title: "Journey Realty Group | Real Estate in Tallapoosa, GA",
+  title: { absolute: "Journey Realty Group | Real Estate in Tallapoosa, GA" },
   description:
     "Journey Realty Group is your trusted real estate partner in Tallapoosa, GA. Browse homes for sale, get a free CMA, or connect with our experienced REALTORS® today.",
   openGraph: {

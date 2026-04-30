@@ -46,13 +46,14 @@ export async function generateMetadata({
     return { title: "Listing Not Found" };
   }
 
-  const title = `${listing.address.streetNumber} ${listing.address.streetName} ${listing.address.streetSuffix} | Journey Realty Group`;
+  const streetAddr = `${listing.address.streetNumber} ${listing.address.streetName} ${listing.address.streetSuffix}`;
+  const title = `${streetAddr}, ${listing.address.city}, ${listing.address.state} — $${listing.listPrice.toLocaleString()}`;
   const desc = `${listing.propertySubType || listing.propertyType} in ${listing.address.city}, ${listing.address.state}. ${listing.beds ?? ""}${listing.beds ? " bed" : ""}${listing.baths ? `, ${listing.baths} bath` : ""} — $${listing.listPrice.toLocaleString()}. MLS# ${listing.listingId}.`;
 
   return {
-    title,
+    title: { absolute: `${title} | Journey Realty Group` },
     description: desc,
-    openGraph: { title, description: desc },
+    openGraph: { title: `${title} | Journey Realty Group`, description: desc },
   };
 }
 
@@ -171,8 +172,64 @@ export default async function ListingDetailPage({ params }: PageProps) {
   };
   const statusStyle = statusColors[status] ?? "bg-ink-muted text-white";
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://www.journeyrealtygroup.net" },
+      { "@type": "ListItem", position: 2, name: "Properties", item: "https://www.journeyrealtygroup.net/properties" },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: `${address.streetNumber} ${address.streetName} ${address.streetSuffix}, ${address.city}, ${address.state}`,
+        item: `https://www.journeyrealtygroup.net/properties/${listingId}`,
+      },
+    ],
+  };
+
+  const listingSchema = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    name: `${address.streetNumber} ${address.streetName} ${address.streetSuffix}, ${address.city}, ${address.state}`,
+    url: `https://www.journeyrealtygroup.net/properties/${listingId}`,
+    description: remarks ?? undefined,
+    price: listPrice,
+    priceCurrency: "USD",
+    numberOfRooms: beds ?? undefined,
+    numberOfBathroomsTotal: baths ?? undefined,
+    floorSize: sqft ? { "@type": "QuantitativeValue", value: sqft, unitCode: "FTK" } : undefined,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: `${address.streetNumber} ${address.streetName} ${address.streetSuffix}`,
+      addressLocality: address.city,
+      addressRegion: address.state,
+      postalCode: address.zip,
+      addressCountry: "US",
+    },
+    ...(lat && lng ? { geo: { "@type": "GeoCoordinates", latitude: lat, longitude: lng } } : {}),
+    yearBuilt: yearBuilt ?? undefined,
+    datePosted: listDate ?? undefined,
+    offers: {
+      "@type": "Offer",
+      price: listPrice,
+      priceCurrency: "USD",
+      availability:
+        status === "Active" || status === "Back On Market"
+          ? "https://schema.org/InStock"
+          : "https://schema.org/SoldOut",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(listingSchema) }}
+      />
       {/* Breadcrumb */}
       <nav
         className="bg-surface border-b border-border-light py-3"

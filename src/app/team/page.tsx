@@ -63,7 +63,7 @@ export default function TeamPage() {
                     {agent.photo ? (
                       <Image
                         src={agent.photo}
-                        alt={agent.name}
+                        alt={`${agent.name}, ${agent.title} at Journey Realty Group`}
                         fill
                         className="object-cover object-[0%_20%] group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"

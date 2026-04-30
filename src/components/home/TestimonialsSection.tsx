@@ -1,30 +1,29 @@
 import SectionHeader from "@/components/ui/SectionHeader";
 import { Star } from "lucide-react";
 
-// Placeholder testimonials — update with real client reviews
 const testimonials = [
   {
     id: "1",
-    name: "Client Name",
-    location: "Tallapoosa, GA",
+    name: "Savannah Overton",
+    location: "Google Review",
     quote:
-      "Working with Journey Realty Group was an amazing experience from start to finish. Our agent was always available to answer questions and guided us through every step of buying our first home.",
+      "HIGHLY recommend Journey Realty for selling and/or buying a home! Renae is hands down the best of the best! She worked so hard for us, communicated very well and timely (even during vacation), and fought for us to make sure we could get the best deal possible. She sold my parents their home and now ours. She's a true blessing! If buying a home can be made easy, she's the one to do it!",
     rating: 5,
   },
   {
     id: "2",
-    name: "Client Name",
-    location: "Bremen, GA",
+    name: "John Daniel",
+    location: "Google Review",
     quote:
-      "We sold our home faster than we expected and got a great price. The team was professional, knowledgeable, and made the entire process stress-free. We could not be happier.",
+      "Journey Realty is a win win when it comes to home buying and selling. A Journey takes preparation and planning, but it should not be stressful. You should embrace it and enjoy each part of it. That's exactly what you get with Journey Realty. They will go above and beyond to make sure the home buying/selling process is enjoyable and their satisfaction comes from your happiness. I speak from experience, as Renae has assisted me with the purchase and sell of a couple of homes and the process was flawless. Trust the process, trust the people and embrace the Journey with Journey Realty!",
     rating: 5,
   },
   {
     id: "3",
-    name: "Client Name",
-    location: "Cedartown, GA",
+    name: "Belinda Patrick",
+    location: "Google Review",
     quote:
-      "As someone relocating from out of state, having a local expert in my corner made all the difference. Journey Realty Group helped us find the perfect home in a neighborhood we love.",
+      "Journey Realty is top notch! They truly care about their clients and work tirelessly to help you find the perfect home for you or find the right buyer for yours!! I wouldn't use anyone else!",
     rating: 5,
   },
 ];

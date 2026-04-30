@@ -217,8 +217,31 @@ export default async function AgentProfilePage({ params, searchParams }: AgentPa
     notFound();
   }
 
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: agent.name,
+    jobTitle: agent.title,
+    worksFor: {
+      "@type": "RealEstateAgent",
+      name: "Journey Realty Group",
+      url: "https://www.journeyrealtygroup.net",
+    },
+    url: `https://www.journeyrealtygroup.net/team/${agent.slug}`,
+    telephone: agent.phone,
+    email: agent.email,
+    ...(agent.serviceAreas.length > 0
+      ? { areaServed: agent.serviceAreas.map((area) => ({ "@type": "Place", name: area })) }
+      : {}),
+    ...(agent.specialties.length > 0 ? { knowsAbout: agent.specialties } : {}),
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
       {/* Back link */}
       <div className="bg-surface border-b border-border-light py-4">
         <div className="max-w-7xl mx-auto px-6">
@@ -243,7 +266,7 @@ export default async function AgentProfilePage({ params, searchParams }: AgentPa
                 {agent.photo ? (
                   <Image
                     src={agent.photo}
-                    alt={agent.name}
+                    alt={`${agent.name}, ${agent.title} at Journey Realty Group`}
                     fill
                     className="object-cover object-top"
                     priority
@@ -403,7 +426,7 @@ export default async function AgentProfilePage({ params, searchParams }: AgentPa
                 >
                   <div className="relative w-20 h-20 mx-auto mb-3 overflow-hidden rounded-full border-2 border-border-light group-hover:border-primary/40 transition-colors">
                     {a.photo ? (
-                      <Image src={a.photo} alt={a.name} fill className="object-cover" />
+                      <Image src={a.photo} alt={`${a.name}, ${a.title} at Journey Realty Group`} fill className="object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-primary-light">
                         <span className="font-raleway font-bold text-lg text-primary/60">
