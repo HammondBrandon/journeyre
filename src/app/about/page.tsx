@@ -171,13 +171,6 @@ export default function AboutPage() {
                   >
                     (770) 855-7995
                   </a>
-                  &nbsp;/&nbsp;
-                  <a
-                    href="tel:7708553622"
-                    className="hover:text-primary transition-colors"
-                  >
-                    (770) 855-3622
-                  </a>
                 </p>
               </div>
             </div>

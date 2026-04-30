@@ -66,13 +66,6 @@ export default function Footer() {
                 (770) 855-7995
               </a>
               <a
-                href="tel:7708553622"
-                className="flex items-center gap-2.5 text-white/70 hover:text-primary transition-colors text-sm font-lora"
-              >
-                <Phone size={14} className="text-primary shrink-0" />
-                (770) 855-3622
-              </a>
-              <a
                 href="mailto:info@journeyrealtygroup.net"
                 className="flex items-center gap-2.5 text-white/70 hover:text-primary transition-colors text-sm font-lora"
               >
