@@ -74,22 +74,6 @@ export const agents: Agent[] = [
     mlsNames: ["Christy Kilgore"],
   },
   {
-    id: "4",
-    slug: "ethan-zell",
-    name: "Ethan Zell",
-    title: "REALTOR®",
-    phone: "770-546-9337",
-    email: "ethanzellsale@gmail.com",
-    shortBio:
-      "Committed to making the home buying and selling process smooth and stress-free.",
-    bio: "Placeholder bio — update with agent's full biography. With a focus on clear communication and personalized service, this agent ensures every client feels informed and supported throughout their real estate journey. Their attention to detail and market insight consistently deliver outstanding results.",
-    photo: ethan,
-    specialties: ["Residential", "Investment Properties", "Condos & Townhomes"],
-    serviceAreas: ["Tallapoosa", "Dallas", "Villa Rica"],
-    designations: ["REALTOR®"],
-    mlsNames: ["Ethan Zell"],
-  },
-  {
     id: "3",
     slug: "heather-kirk",
     name: "Heather Kirk",
@@ -105,6 +89,22 @@ export const agents: Agent[] = [
     designations: ["REALTOR®"],
     // GAMLS stores her name as "Heather Kirk" on most listings, and just "Heather" on one older listing.
     mlsNames: ["Heather Kirk", "Heather"],
+  },
+  {
+    id: "4",
+    slug: "ethan-zell",
+    name: "Ethan Zell",
+    title: "REALTOR®",
+    phone: "770-546-9337",
+    email: "ethanzellsale@gmail.com",
+    shortBio:
+      "Committed to making the home buying and selling process smooth and stress-free.",
+    bio: "Placeholder bio — update with agent's full biography. With a focus on clear communication and personalized service, this agent ensures every client feels informed and supported throughout their real estate journey. Their attention to detail and market insight consistently deliver outstanding results.",
+    photo: ethan,
+    specialties: ["Residential", "Investment Properties", "Condos & Townhomes"],
+    serviceAreas: ["Tallapoosa", "Dallas", "Villa Rica"],
+    designations: ["REALTOR®"],
+    mlsNames: ["Ethan Zell"],
   },
   {
     id: "5",
