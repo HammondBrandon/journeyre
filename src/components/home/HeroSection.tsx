@@ -1,12 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
+import Image from "next/image";
+import heroBg from "../../../public/images/accessory/wide-office-journey-realty-group.jpg";
 
 export default function HeroSection() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
+  const [videoReady, setVideoReady] = useState(false);
+
+  // Defer the YouTube iframe until after the page is interactive so it
+  // doesn't block First Contentful Paint or Largest Contentful Paint.
+  useEffect(() => {
+    const id = window.setTimeout(() => setVideoReady(true), 2500);
+    return () => window.clearTimeout(id);
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,17 +32,31 @@ export default function HeroSection() {
       className="relative min-h-[88vh] flex items-center justify-center overflow-hidden"
       aria-label="Hero"
     >
-      {/* Video background */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden aspect-video pointer-events-none">
-        <iframe
-          src="https://www.youtube.com/embed/VfROvUPseOE?si=c1X2WX6tmaXTU9x7&autoplay=1&mute=1&loop=1&controls=0&playsinline=1&playlist=VfROvUPseOE&modestbranding=1&rel=0&enablejsapi=1&fs=0"
-          title="Hero background video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          referrerPolicy="strict-origin-when-cross-origin"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full"
-        />
-        <div className="absolute inset-0" />
-      </div>
+      {/* Static fallback shown immediately for fast LCP */}
+      <Image
+        src={heroBg}
+        alt=""
+        fill
+        priority
+        fetchPriority="high"
+        className="object-cover"
+        sizes="100vw"
+        placeholder="blur"
+      />
+
+      {/* YouTube iframe lazy-loaded after initial paint */}
+      {videoReady && (
+        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
+          <iframe
+            src="https://www.youtube.com/embed/VfROvUPseOE?si=c1X2WX6tmaXTU9x7&autoplay=1&mute=1&loop=1&controls=0&playsinline=1&playlist=VfROvUPseOE&modestbranding=1&rel=0&enablejsapi=1&fs=0"
+            title="Hero background video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            referrerPolicy="strict-origin-when-cross-origin"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full"
+          />
+        </div>
+      )}
+
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/50" />
 

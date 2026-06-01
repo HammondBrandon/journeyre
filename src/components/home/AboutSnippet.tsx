@@ -21,12 +21,14 @@ export default function AboutSnippet() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Visual side */}
           <div className="relative order-2 lg:order-1">
-            <div className="aspect-[4/3] bg-surface-alt overflow-hidden">
+            <div className="aspect-4/3 bg-surface-alt overflow-hidden">
               {/* Placeholder until office/team photo is provided */}
               <Image
                 src={teamphoto}
                 alt="Journey Realty Group Team Working At Conference Table"
                 className="w-full h-full object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                placeholder="blur"
               />
             </div>
             {/* Accent block */}
