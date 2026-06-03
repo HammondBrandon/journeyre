@@ -9,10 +9,16 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     // Cache optimised images for 30 days instead of the 60-second default.
     minimumCacheTTL: 60 * 60 * 24 * 30,
-    // The RETS photo proxy serves images from /api/listings/[id]/photos —
-    // those are first-party API routes, so no remotePatterns needed.
-    // If you ever switch to direct RETS CDN URLs, add them here:
-    // remotePatterns: [{ hostname: "gamls-rets.connectmls.com" }],
+    // GAMLS listing photos are served directly from the ConnectMLS CDN.
+    // The getBatchCoverPhotos helper returns these URLs directly, and the
+    // /api/listings/[id]/photos proxy 302-redirects here. Both paths require
+    // this entry so next/image can fetch, resize, and convert the source JPEG.
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "gamls-assets.cdn-connectmls.com",
+      },
+    ],
   },
 };
 

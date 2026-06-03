@@ -60,12 +60,13 @@ export default function ListingCard({ listing, priority, coverPhotoUrl }: Listin
         tabIndex={-1}
       >
         {photoSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={photoSrc}
             alt={`Photo of ${address.full}`}
-            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
-            loading={priority ? "eager" : "lazy"}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
+            priority={priority}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-surface to-border-light">
