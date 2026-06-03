@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { unstable_cache } from "next/cache";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Button from "@/components/ui/Button";
 import ListingCard from "@/components/properties/ListingCard";
@@ -29,42 +30,46 @@ const STATUS_RANK: Record<string, number> = {
  */
 const BROKERAGE_QUERY_OPTS = { standardNames: 0 as const };
 
-async function fetchBrokerageListings(): Promise<Listing[]> {
-  // Fetch active/under contract from RESI and LAND in parallel
-  const [resi, land] = await Promise.allSettled([
-    searchListings({
-      ...BROKERAGE_QUERY_OPTS,
-      query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,U,B)`,
-      limit: MAX_FEATURED,
-      offset: 1,
-    }),
-    searchListings({
-      ...BROKERAGE_QUERY_OPTS,
-      query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,U,B)`,
-      class: "LAND",
-      limit: MAX_FEATURED,
-      offset: 1,
-    }),
-  ]);
+const fetchBrokerageListings = unstable_cache(
+  async (): Promise<Listing[]> => {
+    // Fetch active/under contract from RESI and LAND in parallel
+    const [resi, land] = await Promise.allSettled([
+      searchListings({
+        ...BROKERAGE_QUERY_OPTS,
+        query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,U,B)`,
+        limit: MAX_FEATURED,
+        offset: 1,
+      }),
+      searchListings({
+        ...BROKERAGE_QUERY_OPTS,
+        query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,U,B)`,
+        class: "LAND",
+        limit: MAX_FEATURED,
+        offset: 1,
+      }),
+    ]);
 
-  let live: Listing[] = [
-    ...(resi.status === "fulfilled" ? resi.value.listings : []),
-    ...(land.status === "fulfilled" ? land.value.listings : []),
-  ].sort((a, b) => (STATUS_RANK[a.status] ?? 4) - (STATUS_RANK[b.status] ?? 4));
+    let live: Listing[] = [
+      ...(resi.status === "fulfilled" ? resi.value.listings : []),
+      ...(land.status === "fulfilled" ? land.value.listings : []),
+    ].sort((a, b) => (STATUS_RANK[a.status] ?? 4) - (STATUS_RANK[b.status] ?? 4));
 
-  // If we have fewer than 3 live listings, pad with their most recent sold RESI
-  if (live.length < 3) {
-    const sold = await searchListings({
-      ...BROKERAGE_QUERY_OPTS,
-      query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=S)`,
-      limit: MAX_FEATURED - live.length,
-      offset: 1,
-    }).catch(() => ({ listings: [] as Listing[], totalCount: 0, hasMore: false }));
-    live = [...live, ...sold.listings];
-  }
+    // If we have fewer than 3 live listings, pad with their most recent sold RESI
+    if (live.length < 3) {
+      const sold = await searchListings({
+        ...BROKERAGE_QUERY_OPTS,
+        query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=S)`,
+        limit: MAX_FEATURED - live.length,
+        offset: 1,
+      }).catch(() => ({ listings: [] as Listing[], totalCount: 0, hasMore: false }));
+      live = [...live, ...sold.listings];
+    }
 
-  return live.slice(0, MAX_FEATURED);
-}
+    return live.slice(0, MAX_FEATURED);
+  },
+  ["featured-brokerage-listings"],
+  { revalidate: 300 }
+);
 
 async function FeaturedListingsGrid() {
   const listings = await fetchBrokerageListings();

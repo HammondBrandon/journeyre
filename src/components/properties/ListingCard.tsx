@@ -20,11 +20,11 @@ interface ListingCardProps {
 
 // GAMLS MlsStatus decoded display values (COMPACT-DECODED output)
 const STATUS_STYLES: Record<string, string> = {
-  Active:              "bg-primary text-white",
-  "Under Contract":    "bg-amber-500 text-white",
-  "Back On Market":    "bg-amber-600 text-white",
+  Active:              "bg-primary-darker text-white",
+  "Under Contract":    "bg-amber-500 text-ink",
+  "Back On Market":    "bg-amber-600 text-ink",
   Sold:                "bg-ink text-white",
-  Pending:             "bg-amber-500 text-white", // legacy alias
+  Pending:             "bg-amber-500 text-ink",   // legacy alias
   Closed:              "bg-ink text-white",        // legacy alias
 };
 
@@ -106,7 +106,7 @@ export default function ListingCard({ listing, priority, coverPhotoUrl }: Listin
         </Link>
 
         {propertySubType && (
-          <p className="font-raleway text-xs uppercase tracking-wide text-primary mb-1">
+          <p className="font-raleway text-xs uppercase tracking-wide text-primary-darker mb-1">
             {propertySubType}
           </p>
         )}

@@ -32,7 +32,7 @@ export default function SectionHeader({
         <p
           className={cn(
             "font-raleway text-xs font-semibold uppercase tracking-[0.2em] mb-3",
-            light ? "text-primary-light" : "text-primary"
+            light ? "text-primary-light" : "text-primary-darker"
           )}
         >
           {eyebrow}

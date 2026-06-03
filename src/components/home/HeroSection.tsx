@@ -14,7 +14,7 @@ export default function HeroSection() {
   // Defer the YouTube iframe until after the page is interactive so it
   // doesn't block First Contentful Paint or Largest Contentful Paint.
   useEffect(() => {
-    const id = window.setTimeout(() => setVideoReady(true), 2500);
+    const id = window.setTimeout(() => setVideoReady(true), 4000);
     return () => window.clearTimeout(id);
   }, []);
 
@@ -92,6 +92,7 @@ export default function HeroSection() {
           />
           <button
             type="submit"
+            aria-label="Search"
             className="flex items-center gap-2 px-7 py-4 bg-primary text-white font-raleway text-xs font-semibold uppercase tracking-wide hover:bg-primary-dark transition-colors shrink-0 cursor-pointer"
           >
             <Search size={16} />
@@ -115,7 +116,7 @@ export default function HeroSection() {
           </a>
           <a
             href="/selling#cma"
-            className="px-6 py-2.5 bg-primary text-white font-raleway text-xs font-semibold uppercase tracking-wide hover:bg-primary-dark transition-colors"
+            className="px-6 py-2.5 bg-primary-darker text-white font-raleway text-xs font-semibold uppercase tracking-wide hover:bg-primary-dark transition-colors"
           >
             Get a Home Valuation
           </a>
