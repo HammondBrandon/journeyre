@@ -42,10 +42,11 @@ export default function ListingCard({ listing, priority, coverPhotoUrl }: Listin
     officeName,
   } = listing;
 
-  // Prefer the server-fetched CDN URL; fall back to the proxy route
+  // Prefer the server-fetched CDN URL; fall back to the proxy route.
+  // Card view only needs a thumbnail — avoids pulling full-res photos.
   const hasPhoto = photoCount > 0 || !!coverPhotoUrl;
   const photoSrc = coverPhotoUrl
-    ?? (hasPhoto ? `/api/listings/${listingId}/photos?num=0&type=Photo` : null);
+    ?? (hasPhoto ? `/api/listings/${listingId}/photos?num=0&type=ThNail` : null);
 
   const statusStyle =
     STATUS_STYLES[status] ?? "bg-ink-muted text-white";
@@ -60,13 +61,17 @@ export default function ListingCard({ listing, priority, coverPhotoUrl }: Listin
         tabIndex={-1}
       >
         {photoSrc ? (
-          <Image
+          // Plain <img>, not next/image: listing photos come from GAMLS's own
+          // CDN (already reasonably sized) and are numerous/ever-changing, so
+          // routing them through Vercel's Image Optimization would burn
+          // through its shared quota fast — which then breaks image
+          // rendering site-wide, not just for listings.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             src={photoSrc}
             alt={`Photo of ${address.full}`}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
-            priority={priority}
+            loading={priority ? "eager" : "lazy"}
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-surface to-border-light">
@@ -157,6 +162,7 @@ export default function ListingCard({ listing, priority, coverPhotoUrl }: Listin
             width={81}
             height={32}
             className="shrink-0"
+            unoptimized
           />
         </div>
       </div>

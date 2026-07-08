@@ -11,6 +11,7 @@ export default function GAMLSDisclaimer() {
         width={120}
         height={47}
         className="shrink-0"
+        unoptimized
       />
       <p className="font-lora text-xs text-ink-muted leading-relaxed text-center sm:text-left">
         &copy; {year} Georgia MLS. All rights reserved. Information Deemed
