@@ -43,10 +43,9 @@ export default function ListingCard({ listing, priority, coverPhotoUrl }: Listin
   } = listing;
 
   // Prefer the server-fetched CDN URL; fall back to the proxy route.
-  // Card view only needs a thumbnail — avoids pulling full-res photos.
   const hasPhoto = photoCount > 0 || !!coverPhotoUrl;
   const photoSrc = coverPhotoUrl
-    ?? (hasPhoto ? `/api/listings/${listingId}/photos?num=0&type=ThNail` : null);
+    ?? (hasPhoto ? `/api/listings/${listingId}/photos?num=0&type=Photo` : null);
 
   const statusStyle =
     STATUS_STYLES[status] ?? "bg-ink-muted text-white";

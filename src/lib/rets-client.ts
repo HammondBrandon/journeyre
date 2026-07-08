@@ -711,7 +711,7 @@ export async function getBatchCoverPhotos(
     );
     settled.forEach((r, j) => {
       if (r.status === "fulfilled" && r.value.length > 0) {
-        result.set(chunk[j], r.value[0].thumbnailUrl);
+        result.set(chunk[j], r.value[0].url);
       }
     });
   }
