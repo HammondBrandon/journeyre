@@ -28,8 +28,9 @@ export interface Agent {
   mlsNames?: string[];
   /**
    * GAMLS agent code from the ListAgent field (e.g. "BELLRENAE").
-   * More reliable than mlsNames — use this when ShowingContactName is blank.
-   * When set, listings are matched by code first; mlsNames used as fallback.
+   * More reliable than mlsNames — use this when ShowingContactName is blank,
+   * inconsistent, or doesn't match the agent's known name variants.
+   * When set, listings are matched by code only — mlsNames is ignored.
    */
   mlsAgentCode?: string;
 }
@@ -72,6 +73,9 @@ export const agents: Agent[] = [
     serviceAreas: ["Tallapoosa", "Haralson County", "Polk County"],
     designations: ["REALTOR®"],
     mlsNames: ["Christy Kilgore"],
+    // ShowingContactName is blank/inconsistent on most of her listings (only 4 of
+    // 25 match "Christy Kilgore" exactly) — matched by ListAgent code instead.
+    mlsAgentCode: "KILGORECHRIS",
   },
   {
     id: "3",
@@ -89,6 +93,9 @@ export const agents: Agent[] = [
     designations: ["REALTOR®"],
     // GAMLS stores her name as "Heather Kirk" on most listings, and just "Heather" on one older listing.
     mlsNames: ["Heather Kirk", "Heather"],
+    // At least 1 listing has an unrelated ShowingContactName ("Willingham Elizabeth A")
+    // and would be missed by name matching — matched by ListAgent code instead.
+    mlsAgentCode: "KIRKHEATHER",
   },
   {
     id: "4",
@@ -105,6 +112,8 @@ export const agents: Agent[] = [
     serviceAreas: ["Tallapoosa", "Dallas", "Villa Rica"],
     designations: ["REALTOR®"],
     mlsNames: ["Ethan Zell"],
+    // ShowingContactName is blank on 2 of his 3 listings — matched by ListAgent code instead.
+    mlsAgentCode: "EZ5347",
   },
   {
     id: "5",
@@ -122,6 +131,7 @@ export const agents: Agent[] = [
     designations: ["REALTOR®"],
     // GAMLS stores his name as just "Ivey" on his current listing.
     mlsNames: ["Brantley Ivey", "Ivey"],
+    mlsAgentCode: "IVEYBRANTLEY",
   },
 ];
 
