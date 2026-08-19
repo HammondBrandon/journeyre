@@ -165,6 +165,7 @@ export default async function ListingDetailPage({ params }: PageProps) {
 
   const statusColors: Record<string, string> = {
     Active: "bg-primary text-white",
+    New: "bg-primary text-white",
     "Under Contract": "bg-amber-500 text-white",
     "Back On Market": "bg-amber-600 text-white",
     Sold: "bg-ink text-white",
@@ -215,7 +216,7 @@ export default async function ListingDetailPage({ params }: PageProps) {
       price: listPrice,
       priceCurrency: "USD",
       availability:
-        status === "Active" || status === "Back On Market"
+        status === "Active" || status === "New" || status === "Back On Market"
           ? "https://schema.org/InStock"
           : "https://schema.org/SoldOut",
     },

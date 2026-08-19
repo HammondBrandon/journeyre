@@ -333,14 +333,16 @@ export function buildDmqlQuery(params: SearchParams): string {
   const conditions: string[] = [];
 
   // Status — MlsStatus uses SHORT LOOKUP CODES in DMQL2 queries (not decoded values).
-  // GAMLS codes: A=Active, U=Under Contract, B=Back On Market, S=Sold
+  // GAMLS codes: A=Active, N=New, U=Under Contract, B=Back On Market, S=Sold
+  // "New" is a distinct status from "Active" but still means for-sale/not-under-contract,
+  // so it's folded into every Active-inclusive bucket below.
   // The params.status value may come in as a display string or short code.
   const STATUS_CODES: Record<string, string> = {
-    Active:            "A",
+    Active:            "A,N",
     Pending:           "U", // GAMLS has no "Pending" — closest is Under Contract
     "Under Contract":  "U",
-    "Active,Pending":  "A,U",
-    "A,U":             "A,U",
+    "Active,Pending":  "A,N,U",
+    "A,U":             "A,N,U",
     Sold:              "S",
     Closed:            "S", // legacy alias
     "Back On Market":  "B",

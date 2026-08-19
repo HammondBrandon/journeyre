@@ -21,6 +21,7 @@ interface ListingCardProps {
 // GAMLS MlsStatus decoded display values (COMPACT-DECODED output)
 const STATUS_STYLES: Record<string, string> = {
   Active:              "bg-primary-darker text-white",
+  New:                 "bg-primary-darker text-white",
   "Under Contract":    "bg-amber-500 text-ink",
   "Back On Market":    "bg-amber-600 text-ink",
   Sold:                "bg-ink text-white",

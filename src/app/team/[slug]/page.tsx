@@ -27,8 +27,9 @@ interface AgentPageProps {
 const OFFICE_CODE = "JRNY01";
 const BROKERAGE_QUERY_OPTS = { standardNames: 0 as const };
 
-/** STATUS_RANK — Active first, then Under Contract, then Sold */
+/** STATUS_RANK — New/Active first, then Under Contract, then Sold */
 const STATUS_RANK: Record<string, number> = {
+  New: 0,
   Active: 0,
   "Back On Market": 1,
   "Under Contract": 2,
@@ -39,9 +40,10 @@ const STATUS_RANK: Record<string, number> = {
 async function fetchAgentListings(mlsNames: string[], agentCode?: string): Promise<Listing[]> {
   // When we have a GAMLS agent code, query directly — no client-side filtering needed.
   // When we only have display names, fetch all office listings and filter by ShowingContactName.
+  // N = New — a GAMLS status distinct from Active that still means "for sale, not yet under contract".
   const resiQuery = agentCode
-    ? `(ListAgent=${agentCode}),(MlsStatus=|A,U,B,S,X)`
-    : `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,U,B,S,X)`;
+    ? `(ListAgent=${agentCode}),(MlsStatus=|A,N,U,B,S,X)`
+    : `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,N,U,B,S,X)`;
   const landQuery = resiQuery;
 
   const [resi, land] = await Promise.allSettled([

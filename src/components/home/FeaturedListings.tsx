@@ -13,8 +13,9 @@ import type { Listing } from "@/lib/rets-types";
 const OFFICE_CODE = "JRNY01";
 const MAX_FEATURED = 5;
 
-/** Status sort priority — Active first, then Under Contract, then Sold */
+/** Status sort priority — New/Active first, then Under Contract, then Sold */
 const STATUS_RANK: Record<string, number> = {
+  New: 0,
   Active: 0,
   "Back On Market": 1,
   "Under Contract": 2,
@@ -32,17 +33,18 @@ const BROKERAGE_QUERY_OPTS = { standardNames: 0 as const };
 
 const fetchBrokerageListings = unstable_cache(
   async (): Promise<Listing[]> => {
-    // Fetch active/under contract from RESI and LAND in parallel
+    // Fetch new/active/under contract from RESI and LAND in parallel
+    // N = New — a GAMLS status distinct from Active that still means "for sale, not yet under contract".
     const [resi, land] = await Promise.allSettled([
       searchListings({
         ...BROKERAGE_QUERY_OPTS,
-        query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,U,B)`,
+        query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,N,U,B)`,
         limit: MAX_FEATURED,
         offset: 1,
       }),
       searchListings({
         ...BROKERAGE_QUERY_OPTS,
-        query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,U,B)`,
+        query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,N,U,B)`,
         class: "LAND",
         limit: MAX_FEATURED,
         offset: 1,

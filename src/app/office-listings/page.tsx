@@ -26,8 +26,9 @@ export const revalidate = 0;
 const OFFICE_CODE = "JRNY01";
 const PAGE_SIZE = 12;
 
-/** Status sort priority — Active first, then Under Contract, then Sold */
+/** Status sort priority — New/Active first, then Under Contract, then Sold */
 const STATUS_RANK: Record<string, number> = {
+  New: 0,
   Active: 0,
   "Back On Market": 1,
   "Under Contract": 2,
@@ -47,17 +48,18 @@ function sp(val: string | string[] | undefined): string {
 
 async function OfficeListingResults({ page }: { page: number }) {
   try {
-    // Fetch active/under contract from RESI and LAND in parallel
+    // Fetch new/active/under contract from RESI and LAND in parallel
+    // N = New — a GAMLS status distinct from Active that still means "for sale, not yet under contract".
     const [resi, land] = await Promise.allSettled([
       searchListings({
         ...BROKERAGE_QUERY_OPTS,
-        query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,U,B)`,
+        query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,N,U,B)`,
         limit: 50,
         offset: 1,
       }),
       searchListings({
         ...BROKERAGE_QUERY_OPTS,
-        query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,U,B)`,
+        query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,N,U,B)`,
         class: "LAND",
         limit: 50,
         offset: 1,
