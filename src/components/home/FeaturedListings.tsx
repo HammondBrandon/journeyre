@@ -33,20 +33,23 @@ const BROKERAGE_QUERY_OPTS = { standardNames: 0 as const };
 
 const fetchBrokerageListings = unstable_cache(
   async (): Promise<Listing[]> => {
-    // Fetch new/active/under contract from RESI and LAND in parallel
+    // Fetch new/active/under contract from RESI and LAND in parallel.
     // N = New — a GAMLS status distinct from Active that still means "for sale, not yet under contract".
+    // GAMLS doesn't return results newest-first, so we fetch a generous batch (not
+    // capped at MAX_FEATURED) and sort locally before slicing — otherwise a listing
+    // that's actually the most recent can be cut off before the sort ever sees it.
     const [resi, land] = await Promise.allSettled([
       searchListings({
         ...BROKERAGE_QUERY_OPTS,
         query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,N,U,B)`,
-        limit: MAX_FEATURED,
+        limit: 50,
         offset: 1,
       }),
       searchListings({
         ...BROKERAGE_QUERY_OPTS,
         query: `(ListOffice=${OFFICE_CODE}),(MlsStatus=|A,N,U,B)`,
         class: "LAND",
-        limit: MAX_FEATURED,
+        limit: 50,
         offset: 1,
       }),
     ]);
@@ -54,7 +57,11 @@ const fetchBrokerageListings = unstable_cache(
     let live: Listing[] = [
       ...(resi.status === "fulfilled" ? resi.value.listings : []),
       ...(land.status === "fulfilled" ? land.value.listings : []),
-    ].sort((a, b) => (STATUS_RANK[a.status] ?? 4) - (STATUS_RANK[b.status] ?? 4));
+    ].sort((a, b) => {
+      const rankDiff = (STATUS_RANK[a.status] ?? 4) - (STATUS_RANK[b.status] ?? 4);
+      if (rankDiff !== 0) return rankDiff;
+      return (b.modifiedAt ?? "").localeCompare(a.modifiedAt ?? "");
+    });
 
     // If we have fewer than 3 live listings, pad with their most recent sold RESI
     if (live.length < 3) {
